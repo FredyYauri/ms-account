@@ -10,4 +10,6 @@ public interface AccountService {
     Mono<Account> saveAccount(Account account);
     Mono<Account> updateAccount(Account account);
     Mono<Account> deleteAccount(Integer idAccount);
+    Flux<Account> getAccountByIdCustomer(Integer idCustomer);
+
 }

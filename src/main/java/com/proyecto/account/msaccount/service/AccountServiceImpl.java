@@ -2,12 +2,14 @@ package com.proyecto.account.msaccount.service;
 
 import com.proyecto.account.msaccount.entity.Account;
 import com.proyecto.account.msaccount.repository.AccountRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @Service
+@Slf4j
 public class AccountServiceImpl implements AccountService{
     @Autowired
     private AccountRepository accountRepository;
@@ -19,6 +21,12 @@ public class AccountServiceImpl implements AccountService{
     @Override
     public Mono<Account> getAccountByID(Integer idAccount) {
         return accountRepository.findById(idAccount);
+    }
+
+    @Override
+    public Flux<Account> getAccountByIdCustomer(Integer idCustomer) {
+        return accountRepository.findAll()
+                .filter(account -> account.getIdCustomer() == idCustomer);
     }
 
     @Override
